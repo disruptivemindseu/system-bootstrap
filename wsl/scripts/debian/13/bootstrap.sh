@@ -13,7 +13,7 @@ echo "Setting up APT sources..."
 DEBIAN_MIRROR=${DEBIAN_MIRROR:-deb.debian.org}
 source /etc/os-release
 
-rm /etc/apt/sources.list
+rm -f /etc/apt/sources.list
 
 # Create APT source files
 cat <<EOF > /etc/apt/sources.list.d/debian.sources
