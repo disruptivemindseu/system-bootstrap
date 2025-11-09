@@ -1,0 +1,9 @@
+@echo off
+echo Enabling WSL features...
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+echo Setting WSL default version to 2...
+wsl --set-default-version 2
+echo Installing Debian...
+wsl --install -d Debian
+echo Installation complete. Please restart your computer to apply changes.
