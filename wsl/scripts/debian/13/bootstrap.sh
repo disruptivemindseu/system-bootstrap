@@ -53,7 +53,10 @@ find /var/lib/apt/lists -type f -delete
 
 # Update and upgrade existing packages
 echo "Updating and upgrading packages..."
-apt update && apt dist-upgrade -y && apt autoremove --purge && apt clean
+apt update
+apt dist-upgrade -y
+apt autoremove --purge
+apt clean
 
 # Configure timezone
 echo "Configuring timezone..."
