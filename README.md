@@ -10,6 +10,7 @@ To set up a Debian environment in WSL:
 1. Open Command Prompt or PowerShell as Administrator.
 
 2. Change to the wsl directory:
+   ```
    cd wsl
    ```
 
