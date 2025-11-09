@@ -16,36 +16,8 @@ source /etc/os-release
 rm -f /etc/apt/sources.list
 
 # Create APT source files
-cat <<EOF > /etc/apt/sources.list.d/debian.sources
-Types: deb deb-src
-URIs: https://${DEBIAN_MIRROR}/debian/
-Suites: ${VERSION_CODENAME}
-Components: main contrib non-free non-free-firmware
-Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
-
-Types: deb deb-src
-URIs: https://${DEBIAN_MIRROR}/debian-security/
-Suites: ${VERSION_CODENAME}-security
-Components: main contrib non-free non-free-firmware
-Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
-
-Types: deb deb-src
-URIs: https://${DEBIAN_MIRROR}/debian/
-Suites: ${VERSION_CODENAME}-updates
-Components: main contrib non-free non-free-firmware
-Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
-
-EOF
-
-# Create backports source file
-cat <<EOF > /etc/apt/sources.list.d/debian-backports.sources
-Types: deb deb-src
-URIs: https://${DEBIAN_MIRROR}/debian/
-Suites: ${VERSION_CODENAME}-backports
-Components: main contrib non-free non-free-firmware
-Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
-
-EOF
+sed "s/@DEBIAN_MIRROR@/${DEBIAN_MIRROR}/g; s/@VERSION_CODENAME@/${VERSION_CODENAME}/g" debian.sources.template > /etc/apt/sources.list.d/debian.sources
+sed "s/@DEBIAN_MIRROR@/${DEBIAN_MIRROR}/g; s/@VERSION_CODENAME@/${VERSION_CODENAME}/g" debian-backports.sources.template > /etc/apt/sources.list.d/debian-backports.sources
 
 # Clear APT cache
 echo "Clearing APT cache..."
@@ -73,56 +45,7 @@ echo "wireshark-common wireshark-common/install-setuid boolean false" | debconf-
 
 # Install common packages
 echo "Installing common packages..."
-apt install -y      \
-  bash-completion   \
-  bind9-host        \
-  bridge-utils      \
-  build-essential   \
-  command-not-found \
-  curl              \
-  dos2unix          \
-  emacs-nox         \
-  ethtool           \
-  fail2ban          \
-  fping             \
-  git               \
-  gpg               \
-  htop              \
-  icdiff            \
-  iftop             \
-  iperf3            \
-  iptables          \
-  iptraf-ng         \
-  iputils-arping    \
-  jq                \
-  locales           \
-  plocate           \
-  man-db            \
-  mc                \
-  mtr-tiny          \
-  net-tools         \
-  netcat-openbsd    \
-  nload             \
-  nmon              \
-  openssh-client    \
-  pipx              \
-  psmisc            \
-  pwgen             \
-  rclone            \
-  rename            \
-  rsync             \
-  sudo              \
-  sysstat           \
-  tcpdump           \
-  tmux              \
-  tmuxinator        \
-  tshark            \
-  unzip             \
-  vim               \
-  vlan              \
-  wakeonlan         \
-  wget              \
-  whois             \
+apt install -y $(cat packages.list)
 
 echo "Updating command-not-found database..."
 apt update                    # To populate command-not-found database
