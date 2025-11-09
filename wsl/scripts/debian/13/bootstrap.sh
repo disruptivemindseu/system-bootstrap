@@ -93,7 +93,7 @@ apt install -y      \
   iputils-arping    \
   jq                \
   locales           \
-  locate            \
+  plocate           \
   man-db            \
   mc                \
   mtr-tiny          \
