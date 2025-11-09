@@ -19,7 +19,7 @@ To set up a Debian environment in WSL:
 
 2. Once Debian is installed, run the bootstrap script to configure the system:
    ```bash
-   cd cd /path/to/system-bootstrap/wsl/scripts/debian/13
+   cd /path/to/system-bootstrap/wsl/scripts/debian/13
    sudo ./bootstrap.sh
    ```
 
