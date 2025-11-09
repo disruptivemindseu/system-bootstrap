@@ -59,7 +59,7 @@ apt update && apt dist-upgrade -y && apt autoremove --purge && apt clean
 echo "Configuring timezone..."
 echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
 echo 'tzdata tzdata/Zones/Europe select Luxembourg' | debconf-set-selections
-rm /etc/localtime /etc/timezone
+rm -f /etc/localtime /etc/timezone
 DEBIAN_FRONTEND=noninteractive dpkg-reconfigure tzdata
 
 # Preconfigure packages to avoid interactive prompts
